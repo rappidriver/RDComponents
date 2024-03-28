@@ -1,4 +1,5 @@
 import XCTest
+import UIKit
 @testable import RDComponents
 
 final class rdcomponentsTests: XCTestCase {
