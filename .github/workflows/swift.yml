@@ -16,6 +16,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Install Xcodegen
+      run: brew install xcodegen
     - name: Run Xcodegen
       run: xcodegen
     - name: Build
