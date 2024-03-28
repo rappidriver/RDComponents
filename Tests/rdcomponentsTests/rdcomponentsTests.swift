@@ -1,5 +1,6 @@
 import XCTest
-@testable import rdcomponents
+import UIKit
+@testable import RDComponents
 
 final class rdcomponentsTests: XCTestCase {
     func testExample() throws {

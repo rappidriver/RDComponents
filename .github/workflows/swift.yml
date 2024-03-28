@@ -17,6 +17,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build
-      run: swift build -v
+      run: xcodebuild -scheme RDComponents -destination "name=iPhone 11"
     - name: Run tests
-      run: swift test -v
+      run: xcodebuild -scheme RDComponents test -destination "name=iPhone 11"
