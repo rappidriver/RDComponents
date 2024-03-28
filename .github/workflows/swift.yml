@@ -17,6 +17,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build
-      run: xcodebuild
+      run: xcodebuild -scheme RDComponents
     - name: Run tests
       run: swift test -v
