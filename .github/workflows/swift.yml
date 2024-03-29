@@ -21,6 +21,6 @@ jobs:
     - name: Run Xcodegen
       run: xcodegen
     - name: Build
-      run: xcodebuild -scheme RDComponents -destination "name=iPhone 11" | xcpretty
+      run: xcodebuild -scheme RDComponents -destination "name=iPhone 15" | xcpretty
     - name: Run tests
-      run: xcodebuild -scheme RDComponents test -destination "name=iPhone 11" | xcpretty
+      run: xcodebuild -scheme RDComponents test -destination "name=iPhone 15" | xcpretty
