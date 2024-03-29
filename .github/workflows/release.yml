@@ -16,6 +16,10 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
+    - name: Set the value
+      id: step_one
+      run: |
+        echo "action_state=yellow" >> "$GITHUB_ENV"
     - name: Checkout Repo
       uses: actions/checkout@v2
       with:
