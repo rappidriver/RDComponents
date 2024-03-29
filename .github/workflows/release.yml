@@ -16,10 +16,6 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-    - name: Set the value
-      id: step_one
-      run: |
-        echo "action_state=yellow" >> "$GITHUB_ENV"
     - name: Checkout Repo
       uses: actions/checkout@v2
       with:
@@ -60,7 +56,8 @@ jobs:
       run: |
         nextVersion=`npx standard-version --tag-prefix '' --dry-run | sed -n '/^---$/,/^---$/p' | grep -P -o '(\d+\.)(\d+\.)(\d)' | head -n 1`
         echo "$nextVersion"
-        echo "::set-env name=NEXT_VERSION::$nextVersion"
+        echo "NEXT_VERSION=$nextVersion" >> "$GITHUB_ENV"
+        # echo "::set-env name=NEXT_VERSION::$nextVersion"
     - name: Manually next version number
       if: github.event.inputs.releaseVersion != null
       run: |
