@@ -1,12 +1,14 @@
 name: Release
-
+on:
+  pull_request:
+    types: [closed]
 on:
   workflow_dispatch:
     inputs:
       dryRun:
         description: 'Dry Run'
         required: true
-        default: 'true'
+        default: 'fakse'
       releaseVersion:
         description: 'Custom Version (major.minor.patch; leave empty for automatic determination)'
         required: false
