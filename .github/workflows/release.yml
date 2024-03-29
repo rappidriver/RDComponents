@@ -7,7 +7,7 @@ on:
       dryRun:
         description: 'Dry Run'
         required: true
-        default: 'fakse'
+        default: 'false'
       releaseVersion:
         description: 'Custom Version (major.minor.patch; leave empty for automatic determination)'
         required: false
