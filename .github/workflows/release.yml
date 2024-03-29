@@ -27,8 +27,8 @@ jobs:
 
     - name: Configure CI Git User
       run: |
-        git config user.name "Marco Eidinger"
-        git config user.email "marco.eidinger@sap.com"
+        git config user.name "Regis Araujo"
+        git config user.email "regis@r3tecnologia.net"
         git config push.followTags true
         git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/$GITHUB_REPOSITORY
       env:
