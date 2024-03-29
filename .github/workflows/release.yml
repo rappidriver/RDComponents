@@ -107,6 +107,8 @@ jobs:
           ${{ steps.get_changelog.outputs.changelog }}
 
   build_job:
-    uses: rappidriver/rdcomponents/.github/workflows/build.yml@main
+    runs-on: macos-latest
+    steps:
+      - uses: rappidriver/rdcomponents/.github/workflows/build.yml@main
         
     
