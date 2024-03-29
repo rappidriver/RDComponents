@@ -1,20 +1,25 @@
 name: Release
-
 on:
+  pull_request:
+    types: [closed]
+    
   workflow_dispatch:
     inputs:
       dryRun:
         description: 'Dry Run'
         required: true
-        default: 'true'
+        default: 'false'
       releaseVersion:
         description: 'Custom Version (major.minor.patch; leave empty for automatic determination)'
         required: false
 
 jobs:
-
   release:
+    needs: build_job
     runs-on: ubuntu-latest
+    if: github.event.pull_request.base.ref == 'main' && github.event.pull_request.merged == true
+    env:
+      dryRun: false
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v2
@@ -65,7 +70,7 @@ jobs:
         echo "${{ env.NEXT_VERSION }}"
 
     - name: bump version - DRY RUN
-      if: github.event.inputs.dryRun == 'true'
+      if: env.dryRun == 'true'
       run: |
         if ( ${{ github.event.inputs.releaseVersion == null }} ); then
           npx standard-version --tag-prefix '' --dry-run
@@ -73,14 +78,14 @@ jobs:
           npx standard-version --tag-prefix '' --release-as '${{ github.event.inputs.releaseVersion }}' --dry-run
         fi
     - name: bump version - AUTOMATIC
-      if: github.event.inputs.dryRun == 'false' && github.event.inputs.releaseVersion == null
+      if: env.dryRun == 'false' && github.event.inputs.releaseVersion == null
       run: npx standard-version --tag-prefix ''
     - name: bump version - MANUAL VERSION NO.
       if: github.event.inputs.dryRun == 'false' && github.event.inputs.releaseVersion != null
       run: npx standard-version --tag-prefix '' --release-as '${{ github.event.inputs.releaseVersion }}'
 
     - name: Publish tag # only possible on main branch
-      if: github.event.inputs.dryRun == 'false'
+      if: env.dryRun == 'false' || github.event.inputs.dryRun == 'false'
       run: |
         if ( ${{ contains(github.ref, 'main') }} ); then
           git push --follow-tags origin main
@@ -90,7 +95,7 @@ jobs:
 
     - name: Publish GitHub release
       uses: actions/create-release@v1.1.4
-      if: github.event.inputs.dryRun == 'false'
+      if: env.dryRun == 'false' || github.event.inputs.dryRun == 'false'
       env:
         GITHUB_TOKEN: ${{ secrets.PAT_ME_REPO }} # # use PAT to being able to push to protected branch later on
       with:
@@ -100,3 +105,8 @@ jobs:
         prerelease: true
         body: |
           ${{ steps.get_changelog.outputs.changelog }}
+
+  build_job:
+    uses: rappidriver/rdcomponents/.github/workflows/build.yml@main
+        
+    
