@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.base.ref == 'main' && github.event.pull_request.merged == true
     env:
-      DRY_RUN: false
+      dryRun: false
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v2
@@ -70,7 +70,7 @@ jobs:
         echo "${{ env.NEXT_VERSION }}"
 
     - name: bump version - DRY RUN
-      if: github.event.inputs.dryRun == 'true'
+      if: env.dryRun == 'true'
       run: |
         if ( ${{ github.event.inputs.releaseVersion == null }} ); then
           npx standard-version --tag-prefix '' --dry-run
@@ -78,7 +78,7 @@ jobs:
           npx standard-version --tag-prefix '' --release-as '${{ github.event.inputs.releaseVersion }}' --dry-run
         fi
     - name: bump version - AUTOMATIC
-      if: github.event.inputs.dryRun == 'false' && github.event.inputs.releaseVersion == null
+      if: env.dryRun == 'false' && github.event.inputs.releaseVersion == null
       run: npx standard-version --tag-prefix ''
     - name: bump version - MANUAL VERSION NO.
       if: github.event.inputs.dryRun == 'false' && github.event.inputs.releaseVersion != null
