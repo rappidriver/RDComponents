@@ -10,5 +10,4 @@ import Foundation
 public class RDCore {
     
     public var version = "0.0.1"
-    public let name = "RDComponents"
 }
