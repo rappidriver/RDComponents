@@ -105,3 +105,9 @@ jobs:
         prerelease: true
         body: |
           ${{ steps.get_changelog.outputs.changelog }}
+
+  build_job:
+    runs-on: macos-latest
+    steps:
+      - name: Run build job
+        uses: ./.github/workflows/Swift.yaml
