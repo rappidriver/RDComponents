@@ -16,7 +16,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Install Xcodegen
+      run: brew install xcodegen
+    - name: Run Xcodegen
+      run: xcodegen
     - name: Build
-      run: xcodebuild -scheme RDComponents -destination "name=iPhone 11"
+      run: xcodebuild -scheme RDComponents -destination "name=iPhone 14" | xcpretty
     - name: Run tests
-      run: xcodebuild -scheme RDComponents test -destination "name=iPhone 11"
+      run: xcodebuild -scheme RDComponents test -destination "name=iPhone 14" | xcpretty
