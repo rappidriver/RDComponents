@@ -2,6 +2,7 @@ name: Release
 on:
   pull_request:
     types: [closed]
+    
   workflow_dispatch:
     inputs:
       dryRun:
@@ -16,6 +17,9 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.base.ref == 'main' && github.event.pull_request.merged == false
+    env:
+      DRY_RUN: false
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v2
