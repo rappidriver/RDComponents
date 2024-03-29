@@ -110,4 +110,5 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Run build job
-        uses: ./.github/workflows/build.yml
+        uses: rappidriver/rdcomponents/.github/workflows/build.yml@main
+    
