@@ -85,7 +85,7 @@ jobs:
       run: npx standard-version --tag-prefix '' --release-as '${{ github.event.inputs.releaseVersion }}'
 
     - name: Publish tag # only possible on main branch
-      if: github.event.inputs.dryRun == 'false'
+      if: env.dryRun == 'false' || github.event.inputs.dryRun == 'false'
       run: |
         if ( ${{ contains(github.ref, 'main') }} ); then
           git push --follow-tags origin main
@@ -95,7 +95,7 @@ jobs:
 
     - name: Publish GitHub release
       uses: actions/create-release@v1.1.4
-      if: github.event.inputs.dryRun == 'false'
+      if: env.dryRun == 'false' || github.event.inputs.dryRun == 'false'
       env:
         GITHUB_TOKEN: ${{ secrets.PAT_ME_REPO }} # # use PAT to being able to push to protected branch later on
       with:
