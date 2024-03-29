@@ -14,8 +14,9 @@ on:
         required: false
 
 jobs:
-
   release:
+    needs:
+      - build
     runs-on: ubuntu-latest
     if: github.event.pull_request.base.ref == 'main' && github.event.pull_request.merged == true
     env:
