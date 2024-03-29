@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/rappidriver/rdcomponents/compare/0.0.4...0.0.5) (2024-03-29)
+
+
+### Features
+
+* new build and deploy ([60971f1](https://github.com/rappidriver/rdcomponents/commit/60971f1b95f32f4da0bbabbec3b5899426ca9bfe))
+* new build and deploy ([1bbb1b6](https://github.com/rappidriver/rdcomponents/commit/1bbb1b64e983b1308bd144aaf9789d92ca2e6435))
+* new build and deploy ([583a2af](https://github.com/rappidriver/rdcomponents/commit/583a2af1537c0a10d5e4d623b5e4d2d2f2b7d69b))
+* new build and deploy ([30538dc](https://github.com/rappidriver/rdcomponents/commit/30538dcaaf304943d018fa64900cf1b65cb1d3ae))
+* new build and deploy ([850750d](https://github.com/rappidriver/rdcomponents/commit/850750d417dd4544096f94909ca199901a1228bf))
+* new build and deploy ([e3d8186](https://github.com/rappidriver/rdcomponents/commit/e3d8186b52520619ce0b9e432fe70860dbb7a6d7))
+* new build and deploy ([5e5e282](https://github.com/rappidriver/rdcomponents/commit/5e5e282e4128f2364e778e589e2304cd9f90b4cd))
+* new build and deploy ([b76af02](https://github.com/rappidriver/rdcomponents/commit/b76af02d6a6acba80c1c31cb58a350e424254c37))
+* new build and deploy ([6dc3c10](https://github.com/rappidriver/rdcomponents/commit/6dc3c1028e05a6555f7a8032ba881c9499e08f11))
+* new property core ([ab27096](https://github.com/rappidriver/rdcomponents/commit/ab27096de29cb0b9dd4c582691ed569f7a3af6ec))
+* run only develop ([b9fc726](https://github.com/rappidriver/rdcomponents/commit/b9fc7266ff2e00d2021a79264e62bed0437dfe72))
+* run release only develop ([2829472](https://github.com/rappidriver/rdcomponents/commit/2829472ebc511847dd1a8607a8465799e1005182))
+
 ### [0.0.4](https://github.com/rappidriver/rdcomponents/compare/0.0.3...0.0.4) (2024-03-29)
 
 
