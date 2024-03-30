@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "RDComponents",
+    defaultLocalization: "pt-br",
     platforms: [
         .iOS(.v13) // Defina a versão mínima do iOS conforme necessário
     ],
@@ -22,7 +23,15 @@ let package = Package(
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "RDComponents"),
+            name: "RDComponents",
+            dependencies: [
+                
+            ],
+            resources: [
+                .process("Resources/Strings")
+            ]
+        ),
+            
         .testTarget(
             name: "RDComponentsTests",
             dependencies: ["RDComponents"]),
