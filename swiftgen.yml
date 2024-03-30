@@ -1,0 +1,23 @@
+
+input_dir: Sources/RDComponents/Resources/
+output_dir: Sources/RDComponents/Generated/
+strings:
+  inputs:
+    # - Strings/en.lproj/Localizable.strings
+    - Strings/Localizable.strings
+  outputs:
+      templatePath: ./Template/strings-template.stencil
+      output: Strings/RDComponentsLocalizable.swift
+      params:
+        enumName: RDComponentsLocalizable
+        publicAccess: false
+        interfaceBuilder: false
+xcassets:
+  - inputs: Assets.xcassets
+    outputs:
+      templatePath: ./Template/xcassets-template.stencil
+      output: Assets/RDComponentsAssets.swift
+      params:
+          enumName: RDComponentsAssets
+          publicAccess: false
+          forceProvidesNamespaces: true

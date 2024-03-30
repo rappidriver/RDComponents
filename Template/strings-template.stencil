@@ -1,0 +1,95 @@
+// swiftlint:disable all
+// Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
+
+{% if tables.count > 0 %}
+{% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
+import Foundation
+
+// swiftlint:disable superfluous_disable_command
+// swiftlint:disable file_length
+
+// MARK: - Strings
+
+{% macro parametersBlock types %}{% filter removeNewlines:"leading" %}
+  {% for type in types %}
+    _ p{{forloop.counter}}: {{type}}{{ ", " if not forloop.last }}
+  {% endfor %}
+{% endfilter %}{% endmacro %}
+{% macro argumentsBlock types %}{% filter removeNewlines:"leading" %}
+  {% for type in types %}
+    {% if type == "UnsafeRawPointer" %}
+    Int(bitPattern: p{{forloop.counter}})
+    {% else %}
+    p{{forloop.counter}}
+    {% endif %}
+    {{ ", " if not forloop.last }}
+  {% endfor %}
+{% endfilter %}{% endmacro %}
+{% macro recursiveBlock table item %}
+  {% for string in item.strings %}
+  {% if not param.noComments %}
+  /// {{string.translation}}
+  {% endif %}
+  {% if string.types %}
+  {{accessModifier}} static func {{string.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}({% call parametersBlock string.types %}) -> String {
+    return tr("{{table}}", "{{string.key}}", nil, {% call argumentsBlock string.types %})
+  }
+  {% else %}
+  {{accessModifier}} static let {{string.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = tr("{{table}}", "{{string.key}}")
+  {% endif %}
+  {% endfor %}
+  {% for child in item.children %}
+
+  {{accessModifier}} enum {{child.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
+    {% filter indent:2 %}{% call recursiveBlock table child %}{% endfilter %}
+  }
+  {% endfor %}
+{% endmacro %}
+// swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:disable nesting type_body_length type_name
+{% set enumName %}{{param.enumName|default:"L10n"}}{% endset %}
+{{accessModifier}} enum {{enumName}} {
+  {% if tables.count > 1 %}
+  {% for table in tables %}
+    {% filter indent:2 %}{% call recursiveBlock table.name table.levels %}{% endfilter %}
+  {% endfor %}
+  {% else %}
+  {% call recursiveBlock tables.first.name tables.first.levels %}
+  {% endif %}
+}
+
+extension {{param.enumName}} {
+  private static func tr(_ table: String, _ key: String, _ bundle: Bundle? = nil, _ args: CVarArg...) -> String {
+
+    if table.contains("+External") {
+      let bundle = bundle ?? Bundle.main
+      let format = bundle.localizedString(forKey: key, value: nil, table: table)
+      let text = String(format: format, locale: Locale.current, arguments: args)
+
+      if text == key {
+        return tr(table, key, BundleToken.bundle, args)
+      }
+      return String(format: format, locale: Locale.current, arguments: args)
+    }
+
+    let format = BundleToken.bundle.localizedString(forKey: key, value: nil, table: table)
+    return String(format: format, locale: Locale.current, arguments: args)
+  }
+}
+
+internal final class BundleToken {
+  internal static let bundle: Bundle = {
+    #if SWIFT_PACKAGE
+    return Bundle.module
+    #else
+    return Bundle(for: BundleToken.self)
+    #endif
+  }()
+}
+
+// swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:enable nesting type_body_length type_name
+// swiftlint:enable all
+{% else %}
+// No string found
+{% endif %}
