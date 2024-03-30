@@ -16,6 +16,7 @@ internal enum RDComponentsAssets {
   internal enum Base {
 
     internal static let dotsVector = ImageAsset(name: "dots-vector")
+    internal static let gradientBg = ImageAsset(name: "gradient-bg")
     internal static let mainLogo = ImageAsset(name: "main-logo")
   }
   internal enum Colors {
