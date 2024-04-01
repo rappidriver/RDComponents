@@ -22,6 +22,14 @@ public final class RDHeader: UIView {
         return background
     }()
     
+    private lazy var imageOverheadView: UIImageView = {
+        let background = UIImageView()
+        background.contentMode = .scaleAspectFill
+        background.clipsToBounds = true
+        background.translatesAutoresizingMaskIntoConstraints = false
+        return background
+    }()
+    
     private lazy var headerTitleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -88,12 +96,10 @@ public final class RDHeader: UIView {
     private func setupUI() {
         // Adicionar visualizações à hierarquia de visualização
         addSubview(imageBackgroundView)
+        addSubview(imageOverheadView)
         addSubview(headerTitleLabel)
         addSubview(subtitleLabel)
-        
-        // Configurar layout usando Auto Layout ou frames, conforme necessário
-        
-        // Exemplo de configuração de Auto Layout (você pode ajustar as restrições conforme necessário)
+
         imageBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         setBackgroundImage(RDComponentsAssets.Base.gradientBg.image)
         NSLayoutConstraint.activate([
@@ -103,14 +109,20 @@ public final class RDHeader: UIView {
             imageBackgroundView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
         
+        imageOverheadView.translatesAutoresizingMaskIntoConstraints = false
+        imageOverheadView.image = RDComponentsAssets.Base.dotsVector.image
+        NSLayoutConstraint.activate([
+            imageOverheadView.topAnchor.constraint(equalTo: topAnchor, constant: 32),
+            imageOverheadView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32),
+            imageOverheadView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 32),
+        ])
+        
         headerTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         headerTitleLabel.text = self.titleHeader
-//        let titleLabelSize = headerTitleLabel.sizeThatFits(CGSize(width: bounds.width - 32, height: .greatestFiniteMagnitude))
         NSLayoutConstraint.activate([
             headerTitleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
             headerTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             headerTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-//            headerTitleLabel.heightAnchor.constraint(equalToConstant: titleLabelSize.height),
         ])
         
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false

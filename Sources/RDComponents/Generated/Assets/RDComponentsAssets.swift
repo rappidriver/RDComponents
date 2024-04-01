@@ -15,7 +15,9 @@ typealias Color = UIColor
 internal enum RDComponentsAssets {
   internal enum Base {
 
+    internal static let carDropdown = ImageAsset(name: "car-dropdown")
     internal static let dotsVector = ImageAsset(name: "dots-vector")
+    internal static let dropdownIcon = ImageAsset(name: "dropdown-icon")
     internal static let gradientBg = ImageAsset(name: "gradient-bg")
     internal static let mainLogo = ImageAsset(name: "main-logo")
   }
