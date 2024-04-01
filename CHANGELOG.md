@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/rappidriver/RDComponents/compare/0.0.4...0.0.5) (2024-04-01)
+
+
+### Features
+
+* adiciona imagem ao header. ([3e4e22f](https://github.com/rappidriver/RDComponents/commit/3e4e22ffb55ecad144c81fdbd03ad17d8e9293bb))
+* criacao da layout base do dropdown. ([2bce8a7](https://github.com/rappidriver/RDComponents/commit/2bce8a7e204c2520b2a7a5ea939716ad6451ad21))
+
 ### [0.0.3](https://github.com/rappidriver/RDComponents/compare/0.0.2...0.0.3) (2024-03-30)
 
 
